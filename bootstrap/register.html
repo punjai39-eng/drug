@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ลงทะเบียนผู้ป่วย</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            :root{
+                --bs-primary: #A8DADC;   /* pastel teal */
+                --bs-secondary: #F7CAC9; /* pastel pink */
+                --bs-success: #BFD8B8;   /* pastel green */
+                --bs-info: #B8E0F7;      /* pastel sky */
+                --bs-warning: #FFE6A7;   /* pastel yellow */
+                --bs-danger: #F7A6A6;    /* pastel coral */
+                --bs-body-bg: #FFF8F6;
+            }
+            body { background: var(--bs-body-bg); }
+            .card-header { background: linear-gradient(90deg,var(--bs-primary),var(--bs-info)); color: #102a43; }
+        </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-header text-center py-3">
+                        <h3 class="mb-0">ฟอร์มลงทะเบียนผู้ป่วย</h3>
+                    </div>
+                    <div class="card-body">
+                        <form class="needs-validation" novalidate>
+                            <div class="row g-3">
+                                <div class="col-12 col-md-6">
+                                    <label for="fullName" class="form-label">ชื่อ-นามสกุล</label>
+                                    <input type="text" class="form-control" id="fullName" name="fullName" required>
+                                    <div class="invalid-feedback">กรุณากรอกชื่อ-นามสกุล</div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <label for="dob" class="form-label">วันเกิด</label>
+                                    <input type="date" class="form-control" id="dob" name="dob" required>
+                                    <div class="invalid-feedback">กรุณาเลือกวันเกิด</div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <label for="gender" class="form-label">เพศ</label>
+                                    <select id="gender" name="gender" class="form-select" required>
+                                        <option value="">เลือก...</option>
+                                        <option>หญิง</option>
+                                        <option>ชาย</option>
+                                        <option>อื่น ๆ</option>
+                                    </select>
+                                    <div class="invalid-feedback">กรุณาเลือกเพศ</div>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <label for="idNumber" class="form-label">เลขบัตรประชาชน / Passport</label>
+                                    <input type="text" class="form-control" id="idNumber" name="idNumber">
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <label for="phone" class="form-label">เบอร์โทร</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9+()\s-]{6,}" required>
+                                    <div class="invalid-feedback">กรุณากรอกเบอร์โทรที่ถูกต้อง</div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <label for="email" class="form-label">อีเมล</label>
+                                    <input type="email" class="form-control" id="email" name="email">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="address" class="form-label">ที่อยู่</label>
+                                    <input type="text" class="form-control" id="address" name="address">
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <label for="emergencyContact" class="form-label">ผู้ติดต่อฉุกเฉิน (ชื่อ/เบอร์)</label>
+                                    <input type="text" class="form-control" id="emergencyContact" name="emergencyContact">
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <label for="relationship" class="form-label">ความสัมพันธ์</label>
+                                    <input type="text" class="form-control" id="relationship" name="relationship">
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <label for="insurance" class="form-label">สิทธิ์ประกัน</label>
+                                    <input type="text" class="form-control" id="insurance" name="insurance">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="medicalHistory" class="form-label">ประวัติโรคประจำตัว / อาการที่มา</label>
+                                    <textarea class="form-control" id="medicalHistory" name="medicalHistory" rows="3"></textarea>
+                                </div>
+
+                                <div class="col-12 text-end">
+                                    <button type="reset" class="btn btn-warning me-2">รีเซ็ต</button>
+                                    <button type="submit" class="btn btn-primary">ลงทะเบียน</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        } else {
+                            event.preventDefault()
+                            var data = Object.fromEntries(new FormData(form).entries())
+                            var name = data.fullName || 'ผู้ป่วย'
+                            alert('ลงทะเบียนสำเร็จ: ' + name)
+                            form.reset()
+                            form.classList.remove('was-validated')
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+</body>
+</html>
