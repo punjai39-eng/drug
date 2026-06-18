@@ -153,6 +153,37 @@
   </tbody>
 </table>
 
+<div class="card mt-4">
+  <div class="card-body">
+    <h5 class="card-title">การแจกแจงการใช้ยา (ตัวอย่าง)</h5>
+    <div style="height:300px;">
+      <canvas id="myChart" style="max-height:100%; width:100%;"></canvas>
+    </div>
+  </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const ctx = document.getElementById('myChart').getContext('2d');
+      const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['ยากลุ่ม A','ยากลุ่ม B','ยากลุ่ม C','ยากลุ่ม D'],
+          datasets: [{
+            label: 'จำนวนหน่วย',
+            data: [12, 19, 7, 14],
+            backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56', '#8ae234'],
+            borderColor: ['#ff6384', '#36a2eb', '#ffcd56', '#8ae234'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: { y: { beginAtZero: true } },
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
